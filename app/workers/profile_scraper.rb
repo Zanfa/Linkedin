@@ -11,7 +11,7 @@ class ProfileScraper
 
     puts "Pulling #{search_url}"
 
-    doc = Nokogiri::HTML(open(search_url))
+    doc = Nokogiri::HTML(open(search_url), 'User-Agent' => 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36')
     if doc.css('#main.profile').first
       parse_profile(doc)
     elsif doc.css('#main.grid-e').first
@@ -53,7 +53,7 @@ class ProfileScraper
         # We have a match, continue to profile
         link = profile.at_css('h2 a').attr('href')
 
-        result = parse_profile Nokogiri::HTML(open(link))
+        result = parse_profile Nokogiri::HTML(open(link, 'User-Agent' => 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36'))
 
       end
 
