@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @aggregator.name %>
+</p>
+
+<p>
+  <strong>Invite key:</strong>
+  <%= @aggregator.invite_key %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @aggregator.owner %>
+</p>
+
+<%= link_to 'Edit', edit_aggregator_path(@aggregator) %> |
+<%= link_to 'Back', aggregators_path %>

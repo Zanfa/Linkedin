@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  linkedin_id: MyString
+  linkedin_token: MyString
+
+two:
+  linkedin_id: MyString
+  linkedin_token: MyString

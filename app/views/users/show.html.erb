@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Linkedin:</strong>
+  <%= @user.linkedin_id %>
+</p>
+
+<p>
+  <strong>Linkedin token:</strong>
+  <%= @user.linkedin_token %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
