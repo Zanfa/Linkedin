@@ -18,3 +18,5 @@
 .idea/
 .env
 *.DS_Store
+
+*profile_scraper_test.rb
