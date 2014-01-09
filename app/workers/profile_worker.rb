@@ -25,7 +25,8 @@ class ProfileWorker
 
         process(msg)
 
-        rescue
+        rescue Exception => e
+          puts e
           @error_queue.publish(body, persistent: true)
         end
 
