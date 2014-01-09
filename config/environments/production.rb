@@ -79,4 +79,11 @@ LinkedInAggregator::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   $stdout.sync = true
+
+  logger = Logger.new(STDOUT)
+  logger = ActiveSupport::TaggedLogging.new(logger) if defined?(ActiveSupport::TaggedLogging)
+  config.logger = logger
+  log_level_env_override = Logger.const_get(ENV['LOG_LEVEL'].try(:upcase)) rescue nil
+  config.logger.level = log_level_env_override || Logger.const_get(Rails.configuration.log_level.to_s.upcase)
+
 end
