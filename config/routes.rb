@@ -1,9 +1,7 @@
 LinkedInAggregator::Application.routes.draw do
-  resources :aggregators do
-    collection do
-      get 'invite/:invite_key', to: 'aggregators#invite'
-    end
-  end
+  resources :aggregators
+  root to: 'aggregators#index'
+  get '/:invite_key', to: 'aggregators#invite', as: 'invite'
 
   resources :positions
 

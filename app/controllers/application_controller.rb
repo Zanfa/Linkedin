@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :reset_invite_key
 
   def get_current_user
-    User.find(session[:user])
+    if session[:user]
+      User.find(session[:user])
+    end
   end
 
   def reset_invite_key

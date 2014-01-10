@@ -53,6 +53,7 @@ gem 'linkedin'
 gem 'nokogiri'
 gem 'sucker_punch'
 gem 'unicorn'
+gem 'foreman'
 
 gem 'rails_12factor'
 gem 'rails_serve_static_assets'

@@ -38,6 +38,9 @@ class NetworkWorker
       client.authorize_from_access(user.linkedin_token, user.linkedin_secret)
 
       client.connections.all.each do |connection|
+
+        next if connection.id == 'private'
+
         saved_connection = Connection.where(linkedin_id: connection.id, user: user).first_or_create do |c|
           c.first_name = connection.first_name
           c.last_name = connection.last_name

@@ -2,7 +2,7 @@ class ProfileWorker
 
   def initialize
 
-    @conn = Bunny.new(ENV['RABBITMQ_BIGWIG_RX_URL'])
+    @conn = Bunny.new(ENV['RABBITMQ_BIGWIG_URL'])
     @conn.start
 
     @ch = @conn.create_channel
@@ -27,7 +27,8 @@ class ProfileWorker
 
         rescue Exception => e
           puts e
-          @error_queue.publish(body, persistent: true)
+          msg[:error] = e
+          @error_queue.publish(msg.to_json, persistent: true)
         end
 
         @ch.ack(delivery_info.delivery_tag)
@@ -46,10 +47,8 @@ class ProfileWorker
       scraped_positions = scraper.find(connection.first_name, connection.last_name, connection.headline)
 
       if scraped_positions
-        scraped_positions.each do |position|
-          position[:connection] = connection
-          Position.create(position)
-        end
+        connection.profile = scraped_positions
+        connection.save
       end
 
       puts 'Finished processing'

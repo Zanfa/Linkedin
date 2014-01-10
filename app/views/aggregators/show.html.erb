@@ -1,19 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @aggregator.name %>
-</p>
+<h1><%= @aggregator.name %></h1>
 
 <p>
   <strong>Invite key:</strong>
-  <%= @aggregator.invite_key %>
+  <%= link_to invite_url(@aggregator.invite_key), invite_url(@aggregator.invite_key) %>
 </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @aggregator.owner %>
-</p>
+<h2>Profiles</h2>
 
-<%= link_to 'Edit', edit_aggregator_path(@aggregator) %> |
-<%= link_to 'Back', aggregators_path %>
+<ul>
+  <% @profiles.each do |profile| %>
+  <li><%= profile.first_name %> <%= profile.last_name %>
+    <ul>
+      <li><%= profile.profile.to_json %></li>
+    </ul>
+  </li>
+
+  <% end %>
+</ul>

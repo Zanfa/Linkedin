@@ -4,7 +4,12 @@ class AggregatorsController < ApplicationController
   # GET /aggregators
   # GET /aggregators.json
   def index
-    @aggregators = []
+    user = get_current_user
+    if user
+       @aggregator = Aggregator.find_by_owner_id(user)
+       @profiles = Connection.where(user_id: @aggregator.users)
+      render 'aggregators/show'
+    end
   end
 
   # GET /aggregators/1
@@ -13,6 +18,7 @@ class AggregatorsController < ApplicationController
   end
 
   def invite
+    @aggregator = Aggregator.find_by_invite_key(params[:invite_key])
     session[:invite_key] = params[:invite_key]
   end
 
