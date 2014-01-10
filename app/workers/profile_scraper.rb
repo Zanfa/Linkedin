@@ -40,8 +40,8 @@ class ProfileScraper
 
     positions = []
     doc.css('#profile-experience .position').each do |position_div|
-      title = position_div.at_css('h3').text.strip
-      organization = position_div.at_css('h4').text.strip
+      title = position_div.at_css('h3').text.strip.squish
+      organization = position_div.at_css('h4').text.strip.squish
 
       positions << {title: title, organization: organization}
     end
