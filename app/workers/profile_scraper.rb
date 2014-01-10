@@ -15,7 +15,7 @@ class ProfileScraper
 
     puts "Pulling #{search_url}"
 
-    doc = Nokogiri::HTML(open(search_url, 'User-Agent' => @user_agent))
+    doc = Nokogiri::HTML(open(search_url, 'User-Agent' => @user_agent).read, nil, 'UTF-8')
     if doc.css('#main.profile').first
       parse_profile(doc)
     elsif doc.css('#main.grid-e').first
@@ -77,7 +77,7 @@ class ProfileScraper
     end
 
     if profile_url
-      result = parse_profile Nokogiri::HTML(open(profile_url, 'User-Agent' => @user_agent))
+      result = parse_profile Nokogiri::HTML(open(profile_url, 'User-Agent' => @user_agent).read, nil, 'UTF-8')
     end
 
     result
