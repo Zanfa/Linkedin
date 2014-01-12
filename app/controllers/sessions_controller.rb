@@ -4,16 +4,15 @@ class SessionsController < ApplicationController
   def create
 
     user = User.with auth_hash
+    PublishNetworkCrawl.new.async.perform(user.id)
 
     invite_key = session[:invite_key]
     if invite_key
       aggregator = Aggregator.find_by_invite_key(invite_key)
       unless aggregator.users.include? user.id
-        aggregator.users.push user.id
+        aggregator.users = aggregator.users + [user.id]
         aggregator.save
       end
-
-      PublishNetworkCrawl.new.async.perform(user.id)
 
       redirect_to '/'
     else

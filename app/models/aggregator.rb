@@ -5,6 +5,6 @@ class Aggregator < ActiveRecord::Base
 
   private
   def generate_invite_key
-    self.invite_key = SecureRandom.uuid
+    self.invite_key = SecureRandom.uuid unless self.invite_key
   end
 end
