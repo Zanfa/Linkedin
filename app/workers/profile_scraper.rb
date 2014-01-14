@@ -30,6 +30,9 @@ class ProfileScraper
     puts 'Parsing profile'
 
     {
+        first_name: @first_name,
+        last_name: @last_name,
+        headline: @headline,
         positions: get_positions(doc)
     }
   end
