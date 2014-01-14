@@ -16,3 +16,12 @@ test:
   username: vahur
   password:
 
+production:
+  host: ec2-107-20-224-35.compute-1.amazonaws.com
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  database: d7k5675d4bvnk7
+  pool: 5
+  username: bbitphoxpsmrft
+  password: hwV0xHMu_v0BU6PexNWk7aZbpf
