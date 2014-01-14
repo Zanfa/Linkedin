@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Application.services')
+angular.module('Application.services', [])
   .factory('SearchService', ['$q', '$http', function($q, $http) {
     
     var search = function (search) {
