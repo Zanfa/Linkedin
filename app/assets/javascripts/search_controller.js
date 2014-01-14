@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('Application', ['Application.services', 'Application.controllers'])
-  .config(function ($parseProvider) {
+  .config(['$parseProvider', function ($parseProvider) {
     $parseProvider.unwrapPromises(true);
-  })
+  }])
   .directive('searchController', function () {
     return {
       restrict: 'E',
