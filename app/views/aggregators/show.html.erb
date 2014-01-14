@@ -8,14 +8,3 @@
 </p>
 
 <h2>Profiles</h2>
-
-<ul>
-  <% @profiles.each do |profile| %>
-  <li><%= profile.first_name %> <%= profile.last_name %>
-    <ul>
-      <li><%= JSON::dump(profile.profile) %></li>
-    </ul>
-  </li>
-
-  <% end %>
-</ul>

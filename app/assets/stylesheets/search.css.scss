@@ -36,6 +36,13 @@
   input:focus {
     border-color: #3498db;
   }
+
+  .try {
+    color: #2980b9;
+    cursor: pointer;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
 }
 
 .results {

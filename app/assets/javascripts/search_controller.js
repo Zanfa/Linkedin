@@ -17,5 +17,10 @@ angular.module('Application', ['Application.services', 'Application.controllers'
     $scope.update = function () {
       $scope.profiles = SearchService.search($scope.search);
     };
+
+    $scope.try = function (search) {
+        $scope.search = search;
+        $scope.update();
+    }
   }]);
 
