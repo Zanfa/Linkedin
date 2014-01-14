@@ -19,12 +19,7 @@ class AggregatorsController < ApplicationController
       Connection.search(params[:search], where: {user_id: @aggregator.users}).each do |connection|
 
         next if connection.profile == nil
-
-        profile = connection.profile
-        profile[:first_name] = connection.first_name
-        profile[:last_name] = connection.last_name
-        profile[:headline] = connection.headline
-        results.push profile
+        results.push connection.profile
       end
       render json: results
     end
