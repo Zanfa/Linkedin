@@ -1,12 +1,11 @@
 LinkedInAggregator::Application.routes.draw do
   resources :aggregators
   root to: 'aggregators#index'
+  get 'search/:search', to: 'aggregators#search'
   get '/:invite_key', to: 'aggregators#invite', as: 'invite'
 
-  resources :positions
-
   resources :connections
-
+  resources :positions
   resources :users
 
   get '/auth/:provider/callback', to: 'sessions#create'

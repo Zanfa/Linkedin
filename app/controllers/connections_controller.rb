@@ -4,7 +4,25 @@ class ConnectionsController < ApplicationController
   # GET /connections
   # GET /connections.json
   def index
-    @connections = Connection.all
+
+    user = 2#get_current_user
+    
+    if user
+      @aggregator = Aggregator.find_by_owner_id(user)
+      results = []
+      Connection.where(user_id: @aggregator.users).each do |connection|
+
+        next if connection.profile == nil
+
+        profile = connection.profile
+        profile[:first_name] = connection.first_name
+        profile[:last_name] = connection.last_name
+        profile[:headline] = connection.headline
+        results.push profile
+      end
+      render json: {profiles: results};
+    end
+
   end
 
   # GET /connections/1

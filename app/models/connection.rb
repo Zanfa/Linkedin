@@ -1,7 +1,7 @@
 class Connection < ActiveRecord::Base
+  searchkick
 
   belongs_to :user
 
-  has_many :positions
-
+  validates_uniqueness_of :linkedin_id
 end

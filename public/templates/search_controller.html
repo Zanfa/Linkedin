@@ -1,0 +1,35 @@
+<div ng-controller="SearchController">
+    <div class="search">
+        <form ng-submit="update()">
+            <input class="searchbar" type="text" ng-model="search" placeholder="Search Profiles..." />
+            <p class="help">Use a comma-delimited list (e.g. Google, Software Developer) and press Enter</p>
+        </form>
+    </div>
+
+    <div class="results" >
+
+        <div ng-if="profiles.length > 0">
+
+            <div ng-controller="ProfileController"
+                ng-repeat="profile in profiles"
+                ng-click="toggle()"
+                ng-class="{active: active, result: true}">
+                <h2 ng-if="!active">{{ profile.first_name }} {{ profile.last_name }}<span class="headline">{{ profile.headline }}</span></h2>
+                <div class="profile" ng-if="active">
+
+                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+                    <p>{{ profile.headline }}</p>
+
+                    <h3>Positions</h3>
+                    <ol>
+                        <li ng-repeat="position in profile.positions">
+                            {{ position.title }} at {{ position.organization }}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

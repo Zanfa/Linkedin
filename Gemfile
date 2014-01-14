@@ -57,3 +57,5 @@ gem 'foreman'
 
 gem 'rails_12factor'
 gem 'rails_serve_static_assets'
+
+gem 'searchkick'
