@@ -2,8 +2,8 @@
     <div class="search">
         <img ng-if="loading" class="spinner" src="/spinner.gif" />
         <form ng-submit="update()">
-            <input autofocus class="searchbar" type="text" ng-model="search" placeholder="Search Profiles..." />
-            <p class="help">e.g. <a class="try" ng-click="try('Programmer')">Programmer</a> or <a class="try" ng-click="try('Google Engineer')">Google Engineer</a> and press Enter</p>
+            <input autofocus class="searchbar" type="text" ng-model="search" placeholder="Search {{ profileCount }} Profiles..." />
+            <p class="help">To invite more people, give them this link: <a class="try" href="{{ inviteUrl }}" target="_blank">{{ inviteUrl.replace('http://', '') }}</a></p>
         </form>
     </div>
 
@@ -33,6 +33,7 @@
 
         <div ng-if="profiles.length == 0 && !firstSearch">
             <h2 class="no-results">Sorry, no matching profiles!</h2>
+            <p class="help">Try searching for <a class="try" ng-click="try('Programmer')">Programmer</a> or <a class="try" ng-click="try('Google Engineer')">Google Engineer</a></p>
         </div>
 
     </div>

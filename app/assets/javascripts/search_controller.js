@@ -15,6 +15,8 @@ angular.module('Application', ['Application.services', 'Application.controllers'
     $scope.firstSearch = true;
     $scope.search = '';
     $scope.profiles = [];
+    $scope.inviteUrl = window.inviteUrl;
+    $scope.profileCount = window.profileCount;
 
     $scope.update = function () {
       $scope.loading = true;

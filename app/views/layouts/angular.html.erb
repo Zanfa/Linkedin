@@ -6,6 +6,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-resource.min.js"></script>
     <%= javascript_include_tag 'application' %>
+    <script>
+      var inviteUrl = "<%= @aggregator.invite_url %>";
+      var profileCount = <%= Connection.where({user_id: @aggregator.users}).count %>;
+    </script>
     <%= csrf_meta_tags %>
   </head>
   <body>
