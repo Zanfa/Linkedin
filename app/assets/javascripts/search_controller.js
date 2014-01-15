@@ -19,6 +19,9 @@ angular.module('Application', ['Application.services', 'Application.controllers'
     $scope.profileCount = window.profileCount;
 
     $scope.update = function () {
+
+      if ($scope.search.length == 0) return;
+
       $scope.loading = true;
       $scope.firstSearch = false;
 

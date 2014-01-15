@@ -32,11 +32,11 @@ describe('SearchController', function () {
     expect(mock.search).toHaveBeenCalledWith($scope.search);
   });
 
-  it('should list all profiles with empty search', function() {
+  it('should do nothing with empty search', function() {
     spyOn(mock, 'search').andCallThrough();
     $scope.search = '';
     $scope.update();
-    expect(mock.search).toHaveBeenCalledWith('');
+    expect(mock.search).not.toHaveBeenCalledWith('');
   });
   
   it('should set set loading flag while waiting for promise', function() {
@@ -45,6 +45,7 @@ describe('SearchController', function () {
     deferred = $testq.defer();
     spyOn(mock, 'search').andReturn(deferred.promise);
     
+    $scope.search = 'Google';
     $scope.update();
     expect($scope.loading).toEqual(true);
     
@@ -55,6 +56,7 @@ describe('SearchController', function () {
 
   it('should have intial firstSearch flag set, that gets unset when searched', function() {
     expect($scope.firstSearch).toEqual(true);
+    $scope.search = 'Google';
     $scope.update();
     expect($scope.firstSearch).toEqual(false);
   });
