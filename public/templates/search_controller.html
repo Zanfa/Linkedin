@@ -1,6 +1,6 @@
 <div ng-controller="SearchController">
     <div class="search">
-        <img ng-if="loading" class="spinner" src="/assets/spinner.gif" />
+        <img ng-if="loading" class="spinner" src="/spinner.gif" />
         <form ng-submit="update()">
             <input autofocus class="searchbar" type="text" ng-model="search" placeholder="Search Profiles..." />
             <p class="help">e.g. <a class="try" ng-click="try('Programmer')">Programmer</a> or <a class="try" ng-click="try('Google Engineer')">Google Engineer</a> and press Enter</p>
