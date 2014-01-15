@@ -16,8 +16,7 @@ class AggregatorsController < ApplicationController
     if user
       @aggregator = Aggregator.find_by_owner_id(user)
       results = []
-      Connection.search(params[:search], where: {user_id: @aggregator.users}).each do |connection|
-
+      @aggregator.connections.search(params[:search]).each do |connection|
         next if connection.profile == nil
         results.push connection.profile
       end

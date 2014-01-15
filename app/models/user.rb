@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-  belongs_to :aggregator
+  has_and_belongs_to_many :aggregator
+  has_and_belongs_to_many :connections
 
   def self.with(auth_hash)
     User.where(linkedin_id: auth_hash[:uid]).first_or_create do |user|

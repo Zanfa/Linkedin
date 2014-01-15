@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application' %>
     <script>
       var inviteUrl = "<%= @aggregator.invite_url %>";
-      var profileCount = <%= Connection.where({user_id: @aggregator.users}).count %>;
+      var profileCount = <%= @aggregator.connections.count %>;
     </script>
     <%= csrf_meta_tags %>
   </head>

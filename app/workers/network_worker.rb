@@ -41,11 +41,15 @@ class NetworkWorker
 
         next if connection.id == 'private'
 
-        saved_connection = Connection.where(linkedin_id: connection.id, user: user).first_or_create do |c|
+        saved_connection = Connection.where(linkedin_id: connection.id).first_or_initialize
+        saved_connection.tap do |c|
           c.first_name = connection.first_name
           c.last_name = connection.last_name
           c.headline = connection.headline
+
+          c.users.push user unless c.users.include? user
         end
+        saved_connection.save
 
         @profile_queue.publish({id: saved_connection.id}.to_json, persistent: true)
       end

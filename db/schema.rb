@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115170953) do
+ActiveRecord::Schema.define(version: 20140115204845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,18 @@ ActiveRecord::Schema.define(version: 20140115170953) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "users",      array: true
     t.string   "invite_url"
   end
 
   add_index "aggregators", ["owner_id"], name: "index_aggregators_on_owner_id", using: :btree
+
+  create_table "aggregators_users", id: false, force: true do |t|
+    t.integer "aggregator_id"
+    t.integer "user_id"
+  end
+
+  add_index "aggregators_users", ["aggregator_id"], name: "index_aggregators_users_on_aggregator_id", using: :btree
+  add_index "aggregators_users", ["user_id"], name: "index_aggregators_users_on_user_id", using: :btree
 
   create_table "connections", force: true do |t|
     t.string   "first_name"
@@ -37,6 +44,11 @@ ActiveRecord::Schema.define(version: 20140115170953) do
     t.datetime "updated_at"
     t.string   "linkedin_id"
     t.json     "profile"
+  end
+
+  create_table "connections_users", id: false, force: true do |t|
+    t.integer "connection_id"
+    t.integer "user_id"
   end
 
   create_table "positions", force: true do |t|
