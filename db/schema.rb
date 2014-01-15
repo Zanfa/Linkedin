@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110161600) do
+ActiveRecord::Schema.define(version: 20140115170953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140110161600) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "users",      array: true
+    t.string   "invite_url"
   end
 
   add_index "aggregators", ["owner_id"], name: "index_aggregators_on_owner_id", using: :btree

@@ -86,4 +86,5 @@ LinkedInAggregator::Application.configure do
   log_level_env_override = Logger.const_get(ENV['LOG_LEVEL'].try(:upcase)) rescue nil
   config.logger.level = log_level_env_override || Logger.const_get(Rails.configuration.log_level.to_s.upcase)
 
+  Rails.application.routes.default_url_options[:host] = 'linkedinaggregator.herokuapp.com'
 end
