@@ -23,9 +23,9 @@ angular.module('Application', ['Application.services', 'Application.controllers'
       if ($scope.search.length == 0) return;
 
       $scope.loading = true;
-      $scope.firstSearch = false;
 
       SearchService.search($scope.search).then(function (profiles) {
+        $scope.firstSearch = false;
         $scope.profiles = profiles;
         $scope.loading = false;
       });

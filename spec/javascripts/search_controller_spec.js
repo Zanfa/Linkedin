@@ -1,5 +1,5 @@
 describe('SearchController', function () {
-  var $scope, $testq, mock;
+  var $scope, $testq, mock, deferred;
 
   beforeEach(module('Application'));
 
@@ -7,7 +7,7 @@ describe('SearchController', function () {
 
     mock = {
       search: function(terms) {
-        var deferred = $testq.defer();
+        deferred = $testq.defer();
         return deferred.promise; 
       }
     };
@@ -58,7 +58,12 @@ describe('SearchController', function () {
     expect($scope.firstSearch).toEqual(true);
     $scope.search = 'Google';
     $scope.update();
+    expect($scope.firstSearch).toEqual(true);
+
+    deferred.resolve([]);
+    $scope.$apply();
     expect($scope.firstSearch).toEqual(false);
+    
   });
   
   
