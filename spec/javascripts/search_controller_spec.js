@@ -1,5 +1,5 @@
 describe('SearchController', function () {
-  var $scope, mock;
+  var $scope, $testq, mock;
 
   beforeEach(module('Application'));
 
@@ -7,44 +7,56 @@ describe('SearchController', function () {
 
     mock = {
       search: function(terms) {
-        return [
-          {
-            positions: [
-              {title: 'CEO', organization: 'Microsoft'}
-            ]
-          }, 
-          {
-            position: [
-              {title: 'Programmer', organization: 'Facebook'}
-            ]
-          }
-        ]
+        var deferred = $testq.defer();
+        return deferred.promise; 
       }
     };
 
-    spyOn(mock, 'search').andCallThrough();
 
     module(function($provide) {
       $provide.value('SearchService', mock);
     });
   });
   
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function ($q, $rootScope, $controller) {
+    $testq = $q;
     $scope = $rootScope.$new();
     $controller('SearchController', {$scope: $scope});
   }));
 
 
   it('should call FilterService with a proper array', function() {
+    spyOn(mock, 'search').andCallThrough();
     $scope.search = 'CEO, Microsoft';
     $scope.update()
     expect(mock.search).toHaveBeenCalledWith($scope.search);
   });
 
   it('should list all profiles with empty search', function() {
+    spyOn(mock, 'search').andCallThrough();
     $scope.search = '';
     $scope.update();
     expect(mock.search).toHaveBeenCalledWith('');
+  });
+  
+  it('should set set loading flag while waiting for promise', function() {
+    var deferred;
+
+    deferred = $testq.defer();
+    spyOn(mock, 'search').andReturn(deferred.promise);
+    
+    $scope.update();
+    expect($scope.loading).toEqual(true);
+    
+    deferred.resolve([]);
+    $scope.$apply();
+    expect($scope.loading).toEqual(false);
+  });
+
+  it('should have intial firstSearch flag set, that gets unset when searched', function() {
+    expect($scope.firstSearch).toEqual(true);
+    $scope.update();
+    expect($scope.firstSearch).toEqual(false);
   });
   
   

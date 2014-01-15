@@ -11,11 +11,19 @@ angular.module('Application', ['Application.services', 'Application.controllers'
     }
   })
   .controller('SearchController', ['$scope', 'SearchService', function ($scope, SearchService) {
+    $scope.loading = false;
+    $scope.firstSearch = true;
     $scope.search = '';
-    $scope.profiles = SearchService.search($scope.search);
+    $scope.profiles = [];
 
     $scope.update = function () {
-      $scope.profiles = SearchService.search($scope.search);
+      $scope.loading = true;
+      $scope.firstSearch = false;
+
+      SearchService.search($scope.search).then(function (profiles) {
+        $scope.profiles = profiles;
+        $scope.loading = false;
+      });
     };
 
     $scope.try = function (search) {

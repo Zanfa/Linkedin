@@ -10,16 +10,27 @@
 
 .search {
 
+  position: relative;
   width: 600px;
   margin: 50px auto 0;
 
+  .spinner {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
   input {
+    position: relative;
+    background: transparent;
     font-size: 18pt;
     padding: 5px 10px;
     outline: none;
     width: 100%;
 
-    border: 1px solid #7f8c8d;
+    border: 1px solid #666;
     box-sizing: border-box;
   }
 
@@ -64,6 +75,11 @@
 
   .active {
     background: #F5F5F5;
+  }
+
+  .no-results {
+    margin-top: 250px;
+    text-align: center;
   }
 
 
