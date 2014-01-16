@@ -1,0 +1,83 @@
+
+h2 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 30pt;
+  font-weight: 200;
+}
+
+.invite {
+  text-align: justify;
+  max-width: 600px;
+  margin: 150px auto 0;
+
+  a {
+    color: #2980b9;
+  }
+}
+
+.pools {
+
+  width: 370px;
+  height: 370px;
+  margin: 150px auto;
+  border-radius: 3px;
+  border: 1px solid transparent;
+
+  a, .button {
+    color: #2980b9;
+    font-weight: bolder;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    font-size: 16pt;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+  span {
+    color: #AAA;
+    text-align: right;
+    float: right;
+    font-size: 12pt;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0 20px;
+    padding: 15px;
+    border-top: 1px solid #D5D5D5;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:last-child {
+      border-top: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+
+  .button {
+    text-decoration: underline;
+  }
+
+  input {
+    margin: 20px 0;
+  }
+
+  .error {
+    color: #e74c3c;
+  }
+
+}

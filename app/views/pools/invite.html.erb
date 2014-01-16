@@ -1,3 +1,8 @@
-<h1><%= @pool.name %></h1>
 
-<p><%= link_to 'Log in with LinkedIn', '/auth/linkedin' %> to give access to your connections.</p>
+
+<div class="invite">
+  <h2>You've been invited</h2>
+
+  <p>You've been invited to share your LinkedIn connections at <%= @pool.name %></p>
+  <p style="text-align: center;"><%= link_to 'Get Started', '/auth/linkedin' %></p>
+</div>

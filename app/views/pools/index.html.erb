@@ -1,13 +1,13 @@
-
 <div class="pools">
 
-  <h2>Your LinkedIn Pools</h2>
+  <h2>Choose a Pool</h2>
 
   <ul>
     <% @pools.each do |pool| %>
         <li><%= link_to pool.name, pool_path(pool) %>
-          <% if pool.owner == @current_user %>(Owner)<% end%></li>
+          <% if pool.owner == @current_user %><span>(Owner)</span><% end%></li>
     <% end %>
+    <li><%= link_to 'Start a New Pool', new_pool_path %></li>
   </ul>
 
 </div>

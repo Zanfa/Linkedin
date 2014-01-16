@@ -2,6 +2,8 @@ body, html {
   margin: 0;
   padding: 0;
 
+  background: #ffffff;
+
   font-size: 16pt;
   font-family: 'Open Sans', sans-serif;
   color: #222;
@@ -16,6 +18,9 @@ input {
 h2 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  font-size: 18pt;
   margin: 0;
+}
+
+a {
+  color: #2980b9;
 }

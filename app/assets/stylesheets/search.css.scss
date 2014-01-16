@@ -25,6 +25,22 @@
 
 }
 
+input {
+  position: relative;
+  background: transparent;
+  font-size: 18pt;
+  padding: 5px 10px;
+  outline: none;
+  width: 100%;
+
+  border: 1px solid #666;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #2980b9;
+}
+
 .search {
 
   position: relative;
@@ -38,28 +54,16 @@
     top: 10px;
     right: 10px;
   }
-
-  input {
-    position: relative;
-    background: transparent;
-    font-size: 18pt;
-    padding: 5px 10px;
-    outline: none;
-    width: 100%;
-
-    border: 1px solid #666;
-    box-sizing: border-box;
-  }
-
-  input:focus {
-    border-color: #2980b9;
-  }
 }
 
 .results {
 
   width: 960px;
   margin: 50px auto 0;
+
+  h2 {
+    font-size: 18pt;
+  }
 
   .result-count {
     margin-top: 0px;
