@@ -6,15 +6,24 @@ describe('SearchController', function () {
   beforeEach(function () {
 
     mock = {
-      search: function(terms) {
+      search: function(id, terms) {
         deferred = $testq.defer();
         return deferred.promise; 
+      }
+    };
+
+    $window = {
+      pool: {
+        id: 1,
+        inviteUrl: 'www.example.com',
+        profileCount: 100
       }
     };
 
 
     module(function($provide) {
       $provide.value('SearchService', mock);
+      $provide.value('$window', $window);
     });
   });
   
@@ -29,14 +38,14 @@ describe('SearchController', function () {
     spyOn(mock, 'search').andCallThrough();
     $scope.search = 'CEO, Microsoft';
     $scope.update()
-    expect(mock.search).toHaveBeenCalledWith($scope.search);
+    expect(mock.search).toHaveBeenCalledWith(1, $scope.search);
   });
 
   it('should do nothing with empty search', function() {
     spyOn(mock, 'search').andCallThrough();
     $scope.search = '';
     $scope.update();
-    expect(mock.search).not.toHaveBeenCalledWith('');
+    expect(mock.search).not.toHaveBeenCalledWith(1, '');
   });
   
   it('should set set loading flag while waiting for promise', function() {

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_and_belongs_to_many :aggregator
+  has_and_belongs_to_many :pools
   has_and_belongs_to_many :connections
 
   def self.with(auth_hash)

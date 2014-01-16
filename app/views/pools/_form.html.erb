@@ -1,10 +1,10 @@
-<%= form_for(@aggregator) do |f| %>
-  <% if @aggregator.errors.any? %>
+<%= form_for @pool do |f| %>
+  <% if @pool.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@aggregator.errors.count, "error") %> prohibited this aggregator from being saved:</h2>
+      <h2><%= pluralize(@pool.errors.count, "error") %> prohibited this pool from being saved:</h2>
 
       <ul>
-      <% @aggregator.errors.full_messages.each do |msg| %>
+      <% @pool.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

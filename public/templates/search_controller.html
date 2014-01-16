@@ -3,9 +3,9 @@
         <img ng-if="loading" class="spinner" src="/spinner.gif" />
         <form ng-submit="update()">
             <input autofocus class="searchbar" type="text" ng-model="search"
-                   placeholder="Search {{ profileCount }} Profiles..." />
+                   placeholder="Search {{ pool.profileCount }} Profiles..." />
             <p class="help">To invite more people, give them this link:
-                <a class="try" href="{{ inviteUrl }}" target="_blank">{{ inviteUrl.replace('http://', '') }}</a></p>
+                <a class="try" href="{{ pool.inviteUrl }}" target="_blank">{{ pool.inviteUrl.replace('http://', '') }}</a></p>
         </form>
     </div>
 

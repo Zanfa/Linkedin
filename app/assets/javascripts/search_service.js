@@ -3,12 +3,12 @@
 angular.module('Application.services', [])
   .factory('SearchService', ['$q', '$http', function($q, $http) {
     
-    var search = function (search) {
+    var search = function (poolId, search) {
       if (search.length == 0) return [];
 
       var deferred = $q.defer();
 
-      $http.get('/search/' + search)
+      $http.get('/pools/' + poolId + '/search/' + search)
         .success(function(data, status, headers, config) {
           deferred.resolve(data);
         })

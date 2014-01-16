@@ -1,14 +1,18 @@
 LinkedInAggregator::Application.routes.draw do
-  resources :aggregators
-  root to: 'aggregators#index'
-  get 'search/:search', to: 'aggregators#search'
-  get '/:invite_key', to: 'aggregators#invite', as: 'invite'
+  resources :pools do
+    member do
+      get 'search/:search', to: 'pools#search'
+    end
+  end
+
+  root to: 'pools#index'
+  # get 'search/:search', to: 'aggregators#search'
+  get '/:invite_key', to: 'pools#invite', as: 'invite'
+  get '/auth/:provider/callback', to: 'sessions#create'
 
   resources :connections
   resources :positions
   resources :users
-
-  get '/auth/:provider/callback', to: 'sessions#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

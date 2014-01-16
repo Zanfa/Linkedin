@@ -1,0 +1,13 @@
+
+<div class="pools">
+
+  <h2>Your LinkedIn Pools</h2>
+
+  <ul>
+    <% @pools.each do |pool| %>
+        <li><%= link_to pool.name, pool_path(pool) %>
+          <% if pool.owner == @current_user %>(Owner)<% end%></li>
+    <% end %>
+  </ul>
+
+</div>

@@ -4,26 +4,29 @@ class SessionsController < ApplicationController
   def create
 
     user = User.with auth_hash
+    session[:user] = user.id
     #PublishNetworkCrawl.new.async.perform(user.id)
 
     invite_key = session[:invite_key]
     if invite_key
-      aggregator = Aggregator.find_by_invite_key(invite_key)
-      unless aggregator.users.include? user.id
-        aggregator.users = aggregator.users + [user.id]
-        aggregator.save
+      pool = Pool.find_by_invite_key(invite_key).tap do |pool|
+        unless pool.users.include? user
+          pool.users.push user
+          pool.save
+        end
       end
 
-      redirect_to '/'
+      redirect_to pool
     else
 
-      session[:user] = user.id
-      aggregator = Aggregator.where(owner: user).first
+      pools = Pool.where(owner: user)
 
-      if aggregator
-        redirect_to aggregator
+      if pools.count == 1
+        redirect_to pools.first
+      elsif pools.count > 1
+        redirect_to root_path
       else
-        redirect_to new_aggregator_path
+        redirect_to new_pool_path
       end
     end
   end

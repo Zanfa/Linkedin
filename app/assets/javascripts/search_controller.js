@@ -7,16 +7,16 @@ angular.module('Application', ['Application.services', 'Application.controllers'
   .directive('searchController', function () {
     return {
       restrict: 'E',
-      templateUrl: 'templates/search_controller.html'
+      templateUrl: '/templates/search_controller.html'
     }
   })
-  .controller('SearchController', ['$scope', 'SearchService', function ($scope, SearchService) {
+  .controller('SearchController', ['$scope', 'SearchService', '$window', 
+              function ($scope, SearchService, $window) {
     $scope.loading = false;
     $scope.firstSearch = true;
     $scope.search = '';
     $scope.profiles = [];
-    $scope.inviteUrl = window.inviteUrl;
-    $scope.profileCount = window.profileCount;
+    $scope.pool = $window.pool;
 
     $scope.update = function () {
 
@@ -24,7 +24,7 @@ angular.module('Application', ['Application.services', 'Application.controllers'
 
       $scope.loading = true;
 
-      SearchService.search($scope.search).then(function (profiles) {
+      SearchService.search($scope.pool.id, $scope.search).then(function (profiles) {
         $scope.firstSearch = false;
         $scope.profiles = profiles;
         $scope.loading = false;

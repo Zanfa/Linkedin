@@ -8,7 +8,7 @@ class ConnectionsController < ApplicationController
     user = 2#get_current_user
     
     if user
-      @aggregator = Aggregator.find_by_owner_id(user)
+      @aggregator = Pool.find_by_owner_id(user)
       results = []
       Connection.where(user_id: @aggregator.users).each do |connection|
 

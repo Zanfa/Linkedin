@@ -34,8 +34,8 @@ describe('SearchService', function () {
   it('should return 3 results with "Google"', function () {
     var result;
 
-    $httpBackend.expectGET('/search/Google').respond(200, JSON.stringify(data));
-    SearchService.search('Google').then(function (results) {
+    $httpBackend.expectGET('/pools/1/search/Google').respond(200, JSON.stringify(data));
+    SearchService.search(1, 'Google').then(function (results) {
       result = results;
     });
     $httpBackend.flush();
@@ -44,7 +44,7 @@ describe('SearchService', function () {
   });
 
   it("should return 0 results with empty search", function() {
-    expect(SearchService.search('').length).toEqual(0);
+    expect(SearchService.search(1, '').length).toEqual(0);
   });
   
 });

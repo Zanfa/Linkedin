@@ -1,4 +1,4 @@
-class Aggregator < ActiveRecord::Base
+class Pool < ActiveRecord::Base
   before_save :generate_invite_key
 
   belongs_to :owner, class_name: 'User'
