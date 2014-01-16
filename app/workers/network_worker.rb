@@ -22,6 +22,8 @@ class NetworkWorker
 
         process(msg)
 
+        puts 'Finished processing'
+
         @ch.ack(delivery_info.delivery_tag)
       end
     rescue Interrupt => _
@@ -34,29 +36,32 @@ class NetworkWorker
 
       user = User.find(msg[:id])
 
-      client = LinkedIn::Client.new(ENV['LINKEDIN_API_KEY'], ENV['LINKEDIN_SECRET_KEY'])
-      client.authorize_from_access(user.linkedin_token, user.linkedin_secret)
+      if user.should_crawl?
+        user.last_crawled = Time.now
+        user.save
 
-      client.connections.all.each do |connection|
+        client = LinkedIn::Client.new(ENV['LINKEDIN_API_KEY'], ENV['LINKEDIN_SECRET_KEY'])
+        client.authorize_from_access(user.linkedin_token, user.linkedin_secret)
 
-        next if connection.id == 'private'
+        client.connections.all.each do |connection|
 
-        saved_connection = Connection.where(linkedin_id: connection.id).first_or_initialize
-        saved_connection.tap do |c|
-          c.first_name = connection.first_name
-          c.last_name = connection.last_name
-          c.headline = connection.headline
+          next if connection.id == 'private'
 
-          c.users.push user unless c.users.include? user
+          saved_connection = Connection.where(linkedin_id: connection.id).first_or_initialize
+          saved_connection.tap do |c|
+            c.first_name = connection.first_name
+            c.last_name = connection.last_name
+            c.headline = connection.headline
+
+            c.users.push user unless c.users.include? user
+          end
+          saved_connection.save
+
+          @profile_queue.publish({id: saved_connection.id}.to_json, persistent: true)
         end
-        saved_connection.save
-
-        @profile_queue.publish({id: saved_connection.id}.to_json, persistent: true)
       end
 
-      puts 'Finished processing'
     end
   end
-
 
 end

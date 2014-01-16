@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def should_crawl?
+    last_crawled == nil || Time.now - 1.day > last_crawled
+  end
+
 end

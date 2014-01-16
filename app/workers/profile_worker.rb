@@ -25,6 +25,8 @@ class ProfileWorker
 
         process(msg)
 
+        puts 'Finished processing'
+
         rescue Exception => e
           puts e
           msg[:error] = e
@@ -44,14 +46,16 @@ class ProfileWorker
     ActiveRecord::Base.connection_pool.with_connection do
 
       connection = Connection.find(msg[:id])
-      scraped_positions = scraper.find(connection.first_name, connection.last_name, connection.headline)
 
-      if scraped_positions
-        connection.profile = scraped_positions
-        connection.save
+      if connection.should_crawl?
+        scraped_positions = scraper.find(connection.first_name, connection.last_name, connection.headline)
+
+        if scraped_positions
+          connection.profile = scraped_positions
+          connection.last_crawled = Time.now
+          connection.save
+        end
       end
-
-      puts 'Finished processing'
     end
   end
 
