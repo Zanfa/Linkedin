@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
     user = User.with auth_hash
     session[:user] = user.id
-    #PublishNetworkCrawl.new.async.perform(user.id)
+    PublishNetworkCrawl.new.async.perform(user.id)
 
     invite_key = session[:invite_key]
     if invite_key
